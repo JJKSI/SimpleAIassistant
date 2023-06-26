@@ -44,4 +44,31 @@ if __name__ == '__main__':
         if 'The project'.lower() in query.lower():# todo add more paths of your os system
             projectpath = 'D:/Personals/!_Projects'
             subprocess.Popen(['explorer', projectpath])
+        if 'search' in query.lower():
+            search_query = query.split('search', 1)[1].strip()
+            say(f'Searching for {search_query}')
+            webbrowser.open(f'https://www.google.com/search?q={search_query}')
+        if 'play music' in query.lower():
+            search_query = query.split('play music', 1)[1].strip()
+            say('Opening music from YouTube')
+            playlist_url = 'https://www.youtube.com/playlist?list=LL'
+            webbrowser.open(playlist_url)
+           
+            # Extract the video ID from the playlist URL
+            video_id = playlist_url.split('list=LL')[1].split('&')[0]
+
+            # Open the URL of the first video separately
+            video_url = f'https://www.youtube.com/watch?v=oRGDhgITetc&list=LL&index=1&ab_channel=ProvedRecords'
+            webbrowser.open(video_url)
+            
+            current_index = 1  # Index of the current video
+
+            while True:
+                if 'next music' in query.lower():
+                    current_index += 1
+                    video_url = f'{playlist_url}&index={current_index}'
+                    webbrowser.open(video_url)
+                    break
+                else:
+                    query = takecommand()    
         # say(query)'
